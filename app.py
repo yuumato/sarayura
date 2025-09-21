@@ -124,4 +124,10 @@ def submit():
 
 # ========== 起動 ==========
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+
+    port = int(os.environ.get('PORT', 5000))
+    is_debug = os.environ.get('RENDER') != 'true'  # Render環境かどうか判定
+
+    app.run(host='0.0.0.0', port=port, debug=is_debug)
+
