@@ -7,9 +7,6 @@ import smtplib
 from email.mime.text import MIMEText
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-from dotenv import load_dotenv
-
-load_dotenv()
 
 # ========== 環境変数の読み込み ==========
 EMAIL_FROM = os.environ['EMAIL_FROM']

