@@ -14,8 +14,6 @@ EMAIL_TO = os.environ['EMAIL_TO']
 EMAIL_APP_PASSWORD = os.environ['EMAIL_APP_PASSWORD']
 SPREADSHEET_ID = os.environ['SPREADSHEET_ID']
 GOOGLE_CREDENTIALS = json.loads(os.environ['GOOGLE_CREDENTIALS'])
-SECRET_URL = os.environ["SECRET_URL"]
-ACCESS_PASSWORD = os.environ["ACCESS_PASSWORD"]
 
 # ========== アプリ初期化 ==========
 app = Flask(__name__)
@@ -81,7 +79,7 @@ def write_to_sheet(ip, form_data, timestamp):
 # ========== ルーティング ==========
 @app.route('/')
 def index():
-    return render_template("index.html", url=SECRET_URL, pw=ACCESS_PASSWORD)
+    return render_template('index.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -122,8 +120,7 @@ def submit():
     # 制限記録
     ip_last_sent[ip] = now
 
-    # ✅ 完了ページへ遷移し、URL/PWを渡す
-    return '', 204  # 何も返さない（JSだけで完結する）
+    return '✅ 送信完了しました！'
 
 # ========== 起動 ==========
 if __name__ == '__main__':
@@ -133,3 +130,4 @@ if __name__ == '__main__':
     is_debug = os.environ.get('RENDER') != 'true'  # Render環境かどうか判定
 
     app.run(host='0.0.0.0', port=port, debug=is_debug)
+
